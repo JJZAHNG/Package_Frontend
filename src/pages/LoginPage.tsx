@@ -25,7 +25,10 @@ const LoginPage: React.FC = () => {
       const data = await response.json();
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
-      alert('登录成功');
+      localStorage.setItem('username', username);  // ✅ 新增这一行
+
+      // alert('登录成功');
+      navigate('/home');
     } catch (err: any) {
       setError(err.message || '登录失败');
     }
