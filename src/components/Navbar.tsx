@@ -28,37 +28,44 @@ const Navbar: React.FC = () => {
       <div className="nav-left">📦 CarryOn</div>
 
       <ul className="nav-center">
-  <li
-    className={location.pathname === '/home' ? 'active' : ''}
-    onClick={() => navigate('/home')}
-  >
-    Home
-  </li>
-  <li
-    className={location.pathname === '/about' ? 'active' : ''}
-    onClick={() => navigate('/about')}
-  >
-    About
-  </li>
-  <li
-    className={location.pathname === '/order' ? 'active' : ''}
-    onClick={() => navigate('/order')}
-  >
-    Order
-  </li>
-  <li
-    className={location.pathname === '/contact' ? 'active' : ''}
-    onClick={() => navigate('/contact')}
-  >
-    Contact
-  </li>
-</ul>
-
+        <li
+          className={location.pathname === '/home' ? 'active' : ''}
+          onClick={() => navigate('/home')}
+        >
+          Home
+        </li>
+        <li
+          className={location.pathname === '/about' ? 'active' : ''}
+          onClick={() => navigate('/about')}
+        >
+          About
+        </li>
+        <li
+          className={location.pathname === '/order' ? 'active' : ''}
+          onClick={() => navigate('/order')}
+        >
+          Order
+        </li>
+        <li
+          className={location.pathname === '/contact' ? 'active' : ''}
+          onClick={() => navigate('/contact')}
+        >
+          Contact
+        </li>
+      </ul>
 
       <div className="nav-right">
         {username ? (
           <div className="user-info">
-            <span className="user-welcome">Welcome, <strong>{username}</strong></span>
+            <span className="user-welcome">
+              Welcome,&nbsp;
+              <strong
+                onClick={() => navigate('/dashboard')}
+                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                {username}
+              </strong>
+            </span>
             <button className="btn-outline" onClick={handleLogout}>Logout</button>
           </div>
         ) : (

@@ -150,3 +150,13 @@ textarea {
   color: #9ca3af;
   font-size: 0.875rem;
 }
+
+
+.step-container img {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 12px;
+}
+
+

@@ -5,6 +5,10 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import OrderPage from "./pages/OrderPage";
+import DashboardPage from "./pages/DashboardPage";
+import MyOrdersPage from './pages/MyOrdersPage';
+
+
 
 
 function App() {
@@ -16,6 +20,8 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/order" element={<OrderPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/orders" element={<MyOrdersPage />} />
       </Routes>
     </Router>
   );
