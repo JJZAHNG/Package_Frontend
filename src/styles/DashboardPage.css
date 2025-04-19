@@ -9,6 +9,7 @@
   max-width: 1100px;
   margin: 2rem auto;
   padding: 2rem;
+  transition: all 0.4s ease;
 }
 
 h1 {
@@ -31,8 +32,9 @@ h1 {
 .dashboard-cards {
   display: flex;
   gap: 2rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: 2rem;
+  transition: all 0.5s ease;
 }
 
 .dashboard-card {
@@ -41,10 +43,11 @@ h1 {
   padding: 1.8rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   flex: 1;
-  min-width: 300px;
+  min-width: 320px;
   animation: slideUp 0.6s ease forwards;
   transform: translateY(20px);
   opacity: 0;
+  transition: all 0.4s ease;
 }
 
 .card-buttons {
@@ -76,4 +79,75 @@ h1 {
 .btn-outline:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 📦 编辑模式容器 */
+.dashboard-edit-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  transition: all 0.5s ease;
+}
+
+/* 📦 左侧卡片组 */
+.dashboard-left {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  transition: all 0.5s ease;
+}
+
+/* ➡️ 左侧滑动并变淡 */
+.dashboard-left.slide-left {
+  transform: translateX(-60px);
+  opacity: 0.3;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+/* 📝 编辑面板 */
+.profile-edit-panel {
+  background: #fff;
+  padding: 2rem;
+  width: 360px;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  animation: fadeInRight 0.5s ease;
+}
+
+@keyframes fadeInRight {
+  0% {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.profile-edit-panel input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.profile-edit-panel button {
+  width: 48%;
+  padding: 0.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.profile-edit-panel .btn-cancel {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+}
+
+.profile-edit-panel .btn-save {
+  background-color: #111827;
+  color: white;
 }

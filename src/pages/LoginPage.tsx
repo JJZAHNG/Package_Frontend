@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 
-
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -14,6 +13,7 @@ const LoginPage: React.FC = () => {
     setError('');
 
     try {
+      // ✅ 第一步：获取 JWT Token
       const response = await fetch('http://localhost:8000/api/token/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,11 +23,30 @@ const LoginPage: React.FC = () => {
       if (!response.ok) throw new Error('用户名或密码错误');
 
       const data = await response.json();
-      localStorage.setItem('access_token', data.access);
-      localStorage.setItem('refresh_token', data.refresh);
-      localStorage.setItem('username', username);  // ✅ 新增这一行
+      const accessToken = data.access;
+      const refreshToken = data.refresh;
 
-      // alert('登录成功');
+      localStorage.setItem('access_token', accessToken);
+      localStorage.setItem('refresh_token', refreshToken);
+
+      // ✅ 第二步：调用 /api/users/me/ 获取当前用户信息
+      const meRes = await fetch('http://localhost:8000/api/users/me/', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!meRes.ok) throw new Error('无法获取用户信息');
+
+      const userInfo = await meRes.json();
+
+      // ✅ 保存到 localStorage，供后续使用
+      localStorage.setItem('user_id', userInfo.id);
+      localStorage.setItem('username', userInfo.username);
+      localStorage.setItem('email', userInfo.email);
+
+      // ✅ 跳转首页
       navigate('/home');
     } catch (err: any) {
       setError(err.message || '登录失败');
@@ -45,7 +64,7 @@ const LoginPage: React.FC = () => {
           <label>Username</label>
           <input
             type="text"
-            placeholder="you@example.com"
+            placeholder="please enter your username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -57,6 +76,7 @@ const LoginPage: React.FC = () => {
           </div>
           <input
             type="password"
+            placeholder="please enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
