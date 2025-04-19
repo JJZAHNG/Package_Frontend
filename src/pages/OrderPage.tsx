@@ -1,4 +1,3 @@
-// src/pages/OrderPage.tsx
 import React, { useState } from "react";
 import PackageStep from "../components/order/PackageStep";
 import LocationStep from "../components/order/LocationStep";
@@ -17,12 +16,10 @@ const OrderPage: React.FC = () => {
     description: "",
     pickup: {
       building: "",
-      room: "",
       instructions: "",
     },
     delivery: {
       building: "",
-      room: "",
     },
     speed: "",
     scheduleDate: "",
@@ -32,16 +29,67 @@ const OrderPage: React.FC = () => {
   const next = () => setStep((prev) => prev + 1);
   const back = () => setStep((prev) => prev - 1);
 
-  const submitOrder = () => {
-    console.log("📦 提交订单：", formData);
-    alert("订单已提交！");
-    // TODO: 后续对接后端 POST 请求
+  const submitOrder = async () => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      alert("⚠️ 未登录，无法提交订单！");
+      return;
+    }
+
+    // ✅ 构造符合后端要求的请求体
+    const payload = {
+      package_type: formData.packageType,
+      weight: formData.weight,
+      fragile: formData.fragile === "yes", // 转为布尔值
+      description: formData.description,
+      pickup_building: formData.pickup.building,
+      pickup_instructions: formData.pickup.instructions,
+      delivery_building: formData.delivery.building,
+      delivery_speed: formData.speed,
+      scheduled_date: formData.scheduleDate || null,
+      scheduled_time: formData.scheduleTime || null,
+    };
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/orders/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.status === 201) {
+        const data = await res.json();
+        alert("✅ 订单提交成功！");
+        console.log("✅ Created Order:", data);
+        setStep(1);
+        setFormData({
+          packageType: "",
+          weight: "",
+          fragile: "",
+          description: "",
+          pickup: { building: "", instructions: "" },
+          delivery: { building: "" },
+          speed: "",
+          scheduleDate: "",
+          scheduleTime: "",
+        });
+      } else {
+        const error = await res.json();
+        console.error("❌ 提交失败", error);
+        alert(`❌ 提交失败：${JSON.stringify(error)}`);
+      }
+    } catch (err) {
+      console.error("请求错误", err);
+      alert("网络错误，请稍后再试");
+    }
   };
 
   return (
     <div className="order-wrapper">
       <Navbar />
-
       <StepIndicator step={step} />
 
       {step === 1 && (

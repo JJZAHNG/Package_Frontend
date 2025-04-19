@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface Props {
   formData: any;
@@ -8,14 +8,21 @@ interface Props {
 }
 
 const LocationStep: React.FC<Props> = ({ formData, setFormData, next, back }) => {
+  const handleNext = () => {
+    if (!formData.pickup.building || !formData.delivery.building) {
+      alert("Please select both pickup and delivery buildings.");
+      return;
+    }
+    next();
+  };
+
   return (
     <div className="step-container">
       <h2>Pickup & Delivery</h2>
       <p>Where should we pick up and deliver your package?</p>
 
-      {/* Pickup */}
       <h3>Pickup Location</h3>
-      <label>Building</label>
+      <label>Pickup Building<span style={{ color: "red" }}>*</span></label>
       <select
         value={formData.pickup.building}
         onChange={(e) =>
@@ -31,20 +38,7 @@ const LocationStep: React.FC<Props> = ({ formData, setFormData, next, back }) =>
         <option value="Cafeteria">Cafeteria</option>
       </select>
 
-      <label>Room/Office Number</label>
-      <input
-        type="text"
-        placeholder="e.g., 101, Office 3B"
-        value={formData.pickup.room}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            pickup: { ...formData.pickup, room: e.target.value },
-          })
-        }
-      />
-
-      <label>Pickup Instructions (Optional)</label>
+      <label>Pickup Instructions (Optional)<span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>(Optional)</span></label>
       <textarea
         value={formData.pickup.instructions}
         onChange={(e) =>
@@ -53,11 +47,11 @@ const LocationStep: React.FC<Props> = ({ formData, setFormData, next, back }) =>
             pickup: { ...formData.pickup, instructions: e.target.value },
           })
         }
+        placeholder="e.g., meet at front gate"
       />
 
-      {/* Delivery */}
       <h3>Delivery Location</h3>
-      <label>Building</label>
+      <label>Delivery Building</label>
       <select
         value={formData.delivery.building}
         onChange={(e) =>
@@ -73,22 +67,9 @@ const LocationStep: React.FC<Props> = ({ formData, setFormData, next, back }) =>
         <option value="Dorm B">Dorm B</option>
       </select>
 
-      <label>Room/Office Number</label>
-      <input
-        type="text"
-        placeholder="e.g., 101, Office 3B"
-        value={formData.delivery.room}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            delivery: { ...formData.delivery, room: e.target.value },
-          })
-        }
-      />
-
       <div className="step-buttons">
         <button className="btn-outline" onClick={back}>← Back</button>
-        <button className="btn-solid" onClick={next}>Continue →</button>
+        <button className="btn-solid" onClick={handleNext}>Continue →</button>
       </div>
     </div>
   );

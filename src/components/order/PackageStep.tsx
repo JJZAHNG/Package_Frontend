@@ -1,4 +1,3 @@
-// src/components/order/PackageStep.tsx
 import React from "react";
 
 interface PackageStepProps {
@@ -8,12 +7,21 @@ interface PackageStepProps {
 }
 
 const PackageStep: React.FC<PackageStepProps> = ({ formData, setFormData, next }) => {
+  const handleNext = () => {
+    const { packageType, weight, fragile } = formData;
+    if (!packageType || !weight || !fragile) {
+      alert("Please fill in all required fields before continuing.");
+      return;
+    }
+    next();
+  };
+
   return (
     <div className="step-container">
       <h2>Package Details</h2>
       <p>Tell us about what you're sending</p>
 
-      <label>Package Type</label>
+      <label>Package Type<span style={{ color: "red" }}>*</span></label>
       <select
         value={formData.packageType}
         onChange={(e) => setFormData({ ...formData, packageType: e.target.value })}
@@ -24,7 +32,7 @@ const PackageStep: React.FC<PackageStepProps> = ({ formData, setFormData, next }
         <option value="bag">Bag</option>
       </select>
 
-      <label>Approximate Weight</label>
+      <label>Approximate Weight<span style={{ color: "red" }}>*</span></label>
       <select
         value={formData.weight}
         onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
@@ -35,7 +43,7 @@ const PackageStep: React.FC<PackageStepProps> = ({ formData, setFormData, next }
         <option value="heavy">Heavy (&gt; 15 lbs)</option>
       </select>
 
-      <label>Is this package fragile?</label>
+      <label>Is this package fragile?<span style={{ color: "red" }}>*</span></label>
       <select
         value={formData.fragile}
         onChange={(e) => setFormData({ ...formData, fragile: e.target.value })}
@@ -54,7 +62,7 @@ const PackageStep: React.FC<PackageStepProps> = ({ formData, setFormData, next }
 
       <div className="step-buttons">
         <div />
-        <button className="btn-solid" onClick={next}>
+        <button className="btn-solid" onClick={handleNext}>
           Continue →
         </button>
       </div>
