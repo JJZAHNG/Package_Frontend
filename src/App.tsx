@@ -8,7 +8,9 @@ import OrderPage from "./pages/OrderPage";
 import DashboardPage from "./pages/DashboardPage";
 import MyOrdersPage from './pages/MyOrdersPage';
 import ContactPage from './pages/ContactPage';
-
+import SuperuserPage from "./pages/SuperuserPage";
+import UserManagementPage from "./pages/UserManagementPage";
+import DispatcherPage from "./pages/DisptacherPage";
 
 
 function App() {
@@ -23,6 +25,9 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/orders" element={<MyOrdersPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/superuser" element={<SuperuserPage />} />
+        <Route path="/superuser/users" element={<UserManagementPage />} />
+        <Route path="/dispatcher" element={<DispatcherPage />} />  {/* ✅ 注册 Dispatcher 路由 */}
       </Routes>
     </Router>
   );

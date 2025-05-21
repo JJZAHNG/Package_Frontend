@@ -1,0 +1,46 @@
+.superuser-wrapper {
+    min-height: 100vh;
+    background-color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+}
+
+.superuser-content {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.superuser-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.superuser-content p {
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+.superuser-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.superuser-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.superuser-card:hover {
+    transform: translateY(-4px);
+}
+
+.superuser-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}

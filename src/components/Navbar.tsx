@@ -6,12 +6,16 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [username, setUsername] = useState<string | null>(null);
+  const [isDispatcher, setIsDispatcher] = useState<boolean>(false);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     const storedUser = localStorage.getItem('username');
+    const dispatcherFlag = localStorage.getItem('is_dispatcher');
+
     if (token && storedUser) {
       setUsername(storedUser);
+      setIsDispatcher(dispatcherFlag === 'true');
     }
   }, []);
 
@@ -19,8 +23,24 @@ const Navbar: React.FC = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('username');
+    localStorage.removeItem('is_dispatcher');
     setUsername(null);
+    setIsDispatcher(false);
     navigate('/');
+  };
+
+  const handleDispatcherClick = () => {
+    const token = localStorage.getItem('access_token');
+    const flag = localStorage.getItem('is_dispatcher');
+    if (!token) {
+      alert('请先登录后再访问 Dispatcher 页面');
+      navigate('/');
+    } else if (flag !== 'true') {
+      alert('您不是配送人员，无法访问该页面');
+      navigate('/');
+    } else {
+      navigate('/dispatcher');
+    }
   };
 
   return (
@@ -28,30 +48,11 @@ const Navbar: React.FC = () => {
       <div className="nav-left">📦 CarryOn</div>
 
       <ul className="nav-center">
-        <li
-          className={location.pathname === '/home' ? 'active' : ''}
-          onClick={() => navigate('/home')}
-        >
-          Home
-        </li>
-        <li
-          className={location.pathname === '/about' ? 'active' : ''}
-          onClick={() => navigate('/about')}
-        >
-          About
-        </li>
-        <li
-          className={location.pathname === '/order' ? 'active' : ''}
-          onClick={() => navigate('/order')}
-        >
-          Order
-        </li>
-        <li
-          className={location.pathname === '/contact' ? 'active' : ''}
-          onClick={() => navigate('/contact')}
-        >
-          Contact
-        </li>
+        <li className={location.pathname === '/home' ? 'active' : ''} onClick={() => navigate('/home')}>Home</li>
+        <li className={location.pathname === '/about' ? 'active' : ''} onClick={() => navigate('/about')}>About</li>
+        <li className={location.pathname === '/order' ? 'active' : ''} onClick={() => navigate('/order')}>Order</li>
+        <li className={location.pathname === '/contact' ? 'active' : ''} onClick={() => navigate('/contact')}>Contact</li>
+        <li className={location.pathname === '/dispatcher' ? 'active' : ''} onClick={() => navigate('/dispatcher')}>Dispatcher</li>
       </ul>
 
       <div className="nav-right">
