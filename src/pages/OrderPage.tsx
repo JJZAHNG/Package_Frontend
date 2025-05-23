@@ -5,6 +5,8 @@ import ScheduleStep from "../components/order/ScheduleStep";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/OrderPage.css";
+import { API_BASE } from '../config';
+
 
 const OrderPage: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -53,7 +55,7 @@ const OrderPage: React.FC = () => {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/orders/", {
+      const res = await fetch(`${API_BASE}/api/orders/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

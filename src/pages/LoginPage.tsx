@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../config';
+
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ const LoginPage: React.FC = () => {
 
     try {
       // ✅ 第一步：获取 JWT Token
-      const response = await fetch('http://localhost:8000/api/token/', {
+      const response = await fetch(`${API_BASE}/api/token/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -30,7 +32,7 @@ const LoginPage: React.FC = () => {
       localStorage.setItem('refresh_token', refreshToken);
 
       // ✅ 第二步：调用 /api/users/me/ 获取当前用户信息
-      const meRes = await fetch('http://localhost:8000/api/users/me/', {
+      const meRes = await fetch(`${API_BASE}/api/users/me/`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -56,7 +58,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <div className="logo">📦 CarryOn</div>
+        <div className="logo">📦 CulverBot</div>
         <h2>Welcome back</h2>
         <p className="subtitle">Enter your credentials to access your account</p>
 

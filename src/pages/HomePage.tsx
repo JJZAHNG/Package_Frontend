@@ -5,6 +5,8 @@ import Features from '../components/Features';
 import HowItWorks from '../components/HowItWorks';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
+import { API_BASE } from '../config';
+
 
 const HomePage: React.FC = () => {
   return (

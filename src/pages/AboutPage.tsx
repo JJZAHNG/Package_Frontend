@@ -2,6 +2,9 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/AboutPage.css';
+import { API_BASE } from '../config';
+
+
 
 const AboutPage: React.FC = () => {
   return (
@@ -10,7 +13,7 @@ const AboutPage: React.FC = () => {
 
       {/* Hero */}
       <section className="about-hero">
-        <h1>About CarryOn</h1>
+        <h1>About CulverBot</h1>
         <p>We're on a mission to make campus deliveries fast, reliable, and hassle-free.</p>
       </section>
 
@@ -19,7 +22,7 @@ const AboutPage: React.FC = () => {
         <div className="story-text">
           <h2>Our Story</h2>
           <p>
-            CarryOn was founded in 2023 by a group of university students who were frustrated with
+            CulverBot was founded in 2023 by a group of university students who were frustrated with
             the lack of efficient delivery options on campus. Whether it was textbooks, lab
             materials, or personal items, getting things from one side of campus to another was
             always a challenge.
@@ -42,7 +45,7 @@ const AboutPage: React.FC = () => {
       {/* Values */}
       <section className="about-values">
         <h2>Our Values</h2>
-        <p>The principles that guide everything we do at CarryOn.</p>
+        <p>The principles that guide everything we do at CulverBot.</p>
         <div className="value-cards">
           <div className="value-card">
             <div className="icon">📦</div>
@@ -74,7 +77,7 @@ const AboutPage: React.FC = () => {
       {/* Team */}
       <section className="about-team">
         <h2>Meet Our Team</h2>
-        <p>The dedicated people behind CarryOn who make it all happen.</p>
+        <p>The dedicated people behind CulverBot who make it all happen.</p>
         <div className="team-members">
           <div className="team-member">
             <div className="avatar-placeholder" />
@@ -102,7 +105,7 @@ const AboutPage: React.FC = () => {
       {/*/!* CTA *!/*/}
       {/*<section className="about-cta">*/}
       {/*  <h2>Ready to get started?</h2>*/}
-      {/*  <p>Join thousands of students and faculty who trust CarryOn for their campus delivery needs.</p>*/}
+      {/*  <p>Join thousands of students and faculty who trust CulverBot for their campus delivery needs.</p>*/}
       {/*  <div className="cta-buttons">*/}
       {/*    <button className="btn-solid">Sign Up Now →</button>*/}
       {/*    <button className="btn-outline">Contact Us</button>*/}

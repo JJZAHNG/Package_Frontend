@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/DashboardPage.css';
+import { API_BASE } from '../config';
+
 
 const DashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const DashboardPage: React.FC = () => {
       const token = localStorage.getItem('access_token');
 
       try {
-        const res = await fetch('http://127.0.0.1:8000/api/orders/', {
+        const res = await fetch(`${API_BASE}/api/orders/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,7 +67,7 @@ const DashboardPage: React.FC = () => {
       body.password = newPassword;
     }
 
-    const res = await fetch(`http://127.0.0.1:8000/api/users/${userId}/`, {
+    const res = await fetch(`${API_BASE}/api/users/${userId}/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

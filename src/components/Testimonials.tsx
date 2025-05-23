@@ -15,7 +15,7 @@ const Testimonials: React.FC = () => {
           <h4>Sarah J.</h4>
           <p className="role">Junior, Computer Science</p>
           <p className="comment">
-            "CarryOn has been a lifesaver during finals week! I could get my study materials delivered without leaving the library."
+            "CulverBot has been a lifesaver during finals week! I could get my study materials delivered without leaving the library."
           </p>
         </div>
 
@@ -24,7 +24,7 @@ const Testimonials: React.FC = () => {
           <h4>Prof. Martinez</h4>
           <p className="role">Faculty, Engineering</p>
           <p className="comment">
-            "I use CarryOn to send important documents between departments. It's reliable and much faster than campus mail."
+            "I use CulverBot to send important documents between departments. It's reliable and much faster than campus mail."
           </p>
         </div>
       </div>

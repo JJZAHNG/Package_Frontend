@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/DispatcherPage.css';
+import { API_BASE } from '../config';
+
 
 interface Order {
     id: number;
@@ -31,7 +33,7 @@ const DispatcherPage: React.FC = () => {
             }
 
             try {
-                const res = await fetch('http://127.0.0.1:8000/api/users/me/', {
+                const res = await fetch(`${API_BASE}/api/users/me/`, {
                     headers: {Authorization: `Bearer ${token}`},
                 });
 
@@ -54,7 +56,7 @@ const DispatcherPage: React.FC = () => {
 
         const fetchOrders = async (token: string) => {
             try {
-                const res = await fetch('http://127.0.0.1:8000/api/dispatch/orders/', {
+                const res = await fetch(`${API_BASE}/api/dispatch/orders/`, {
                     headers: {Authorization: `Bearer ${token}`},
                 });
                 const data = await res.json();
@@ -70,7 +72,7 @@ const DispatcherPage: React.FC = () => {
     const updateStatus = async (orderId: number, newStatus: string) => {
         const token = localStorage.getItem('access_token');
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/dispatch/orders/${orderId}/`, {
+            const res = await fetch(`${API_BASE}/api/dispatch/orders/${orderId}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +85,7 @@ const DispatcherPage: React.FC = () => {
                 const updated = await res.json();
                 setOrders((prev) => prev.map((o) => (o.id === orderId ? updated : o)));
             } else {
-                alert('❌ 更新失败');
+                alert('❌ FAILED TO UPDATE');
             }
         } catch (err) {
             console.error('状态更新异常:', err);
@@ -101,8 +103,8 @@ const DispatcherPage: React.FC = () => {
         return date.toLocaleString(); // 可根据需要改成 date.toLocaleDateString()
     };
 
-    if (loading) return <div className="loading">⏳ 正在加载页面...</div>;
-    if (!authorized) return <div className="forbidden">⛔ 您没有权限访问此页面</div>;
+    if (loading) return <div className="loading">⏳ LOADING...</div>;
+    if (!authorized) return <div className="forbidden">⛔ NOT AUTHORIZED</div>;
 
     return (
         <div className="dispatcher-wrapper">

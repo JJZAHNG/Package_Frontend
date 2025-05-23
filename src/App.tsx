@@ -11,6 +11,7 @@ import ContactPage from './pages/ContactPage';
 import SuperuserPage from "./pages/SuperuserPage";
 import UserManagementPage from "./pages/UserManagementPage";
 import DispatcherPage from "./pages/DisptacherPage";
+import MessagePage from "./pages/MessagePage";
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/superuser" element={<SuperuserPage />} />
         <Route path="/superuser/users" element={<UserManagementPage />} />
-        <Route path="/dispatcher" element={<DispatcherPage />} />  {/* ✅ 注册 Dispatcher 路由 */}
+        <Route path="/dispatcher" element={<DispatcherPage />} />
+        <Route path="/superuser/messages" element={<MessagePage />} />
       </Routes>
     </Router>
   );

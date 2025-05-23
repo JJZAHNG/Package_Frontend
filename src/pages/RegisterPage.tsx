@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './LoginPage.css'; // 复用原样式
 import { useNavigate } from 'react-router-dom';
+import { API_BASE } from '../config';
+
+
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +24,7 @@ const RegisterPage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/users/', {
+      const response = await fetch(`${API_BASE}/api/users/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -44,7 +47,7 @@ const RegisterPage: React.FC = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <div className="logo">📦 CarryOn</div>
+        <div className="logo">📦 CulverBot</div>
         <h2>Create your account</h2>
         <p className="subtitle">Sign up to get started</p>
 

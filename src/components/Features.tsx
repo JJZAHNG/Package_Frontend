@@ -4,7 +4,7 @@ import '../styles/Features.css';
 const Features: React.FC = () => {
   return (
     <section className="features">
-      <h2>Why Choose CarryOn?</h2>
+      <h2>Why Choose CulverBot?</h2>
       <p className="features-subtitle">
         Our campus courier service is designed with students and faculty in mind.
       </p>

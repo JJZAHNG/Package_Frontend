@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/MyOrdersPage.css";
+import { API_BASE } from '../config';
+
 
 interface Order {
   id: number;
@@ -28,7 +30,7 @@ const MyOrdersPage: React.FC = () => {
       const token = localStorage.getItem("access_token");
       if (!token) return;
 
-      const response = await fetch("http://127.0.0.1:8000/api/orders/", {
+      const response = await fetch(`${API_BASE}/api/orders/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

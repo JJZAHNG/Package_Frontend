@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar">
-      <div className="nav-left">📦 CarryOn</div>
+      <div className="nav-left">📦 CulverBot</div>
 
       <ul className="nav-center">
         <li className={location.pathname === '/home' ? 'active' : ''} onClick={() => navigate('/home')}>Home</li>

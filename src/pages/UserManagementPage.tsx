@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/UserManagementPage.css';
+import { API_BASE } from '../config';
+
 
 interface User {
     id: number;
@@ -21,7 +23,7 @@ const UserManagementPage: React.FC = () => {
     const fetchUsers = async () => {
         const token = localStorage.getItem('access_token');
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/users/', {
+            const res = await fetch(`${API_BASE}/api/users/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -42,7 +44,7 @@ const UserManagementPage: React.FC = () => {
     const updateDispatcher = async (userId: number, isDispatcher: boolean) => {
         const token = localStorage.getItem('access_token');
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/users/${userId}/`, {
+            const res = await fetch(`${API_BASE}/api/users/${userId}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
